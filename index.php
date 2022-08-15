@@ -77,7 +77,7 @@
     $host = "localhost";
     $user = "root";
     $password = "";
-    $db = "demo";
+    $db = "mtxsolar";
 
     $con = mysqli_connect($host, $user, $password);
     mysqli_set_charset($con, "utf8mb4");
@@ -89,8 +89,8 @@
 
         $_SESSION["username"] = $uname;
 
-        $sql = "select * from loginform where user='" . $uname . "'AND Pass='" . $password . "' limit 1";
-        $sql1 = "select * from loginform";
+        $sql = "select * from user where username='" . $uname . "'AND password='" . $password . "' limit 1";
+        $sql1 = "select * from client";
 
         try {
             $result = mysqli_query($con, $sql);

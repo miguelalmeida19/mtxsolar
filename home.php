@@ -18,7 +18,8 @@
 
         <!-- Google Fonts -->
         <link href="https://fonts.gstatic.com" rel="preconnect">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet">
 
         <!-- Vendor CSS Files -->
         <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,6 +31,8 @@
         <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
         <link href="assets/css/style.css" rel="stylesheet">
+
+
     </head>
 
     <body>
@@ -50,7 +53,8 @@
 
                     <li class="nav-item dropdown pe-3">
 
-                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
+                           data-bs-toggle="dropdown">
                             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                             <span class="d-none d-md-block dropdown-toggle ps-2">
                                 <?php
@@ -156,7 +160,8 @@
                                                 echo $_SESSION["clients"];
                                             ?>
                                         </h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
+                                                class="text-muted small pt-2 ps-1">decrease</span>
 
                                     </div>
                                 </div>
@@ -172,54 +177,62 @@
                             <h5 class="card-title">Customers List</h5>
 
                             <!-- Dark Table -->
-                            <table class="table table-dark">
+                            <?php
+
+                                error_reporting(E_ERROR | E_WARNING | E_PARSE);
+                                $host = "localhost";
+                                $user = "root";
+                                $password = "";
+                                $db = "mtxsolar";
+
+                                $con = mysqli_connect($host, $user, $password);
+                                mysqli_set_charset($con, "utf8mb4");
+                                mysqli_select_db($con, $db);
+
+                                $sql = "select * from client";
+                                $result = mysqli_query($con, $sql);
+
+                                echo "<table class='table table-dark'>
                                 <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Position</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Start Date</th>
+                                    <th scope='col'>Client ID</th>
+                                    <th scope='col'>Name</th>
+                                    <th scope='col'>User ID</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bridie Kessler</td>
-                                    <td>Developer</td>
-                                    <td>35</td>
-                                    <td>2014-12-05</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Ashleigh Langosh</td>
-                                    <td>Finance</td>
-                                    <td>45</td>
-                                    <td>2011-08-12</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Angus Grady</td>
-                                    <td>HR</td>
-                                    <td>34</td>
-                                    <td>2012-06-11</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Raheem Lehner</td>
-                                    <td>Dynamic Division Officer</td>
-                                    <td>47</td>
-                                    <td>2011-04-19</td>
-                                </tr>
+                                <tbody>";
+
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "
+                                        <tr data-bs-toggle='modal' data-bs-target='#verticalycentered'>
+                                            <th scope='row'>{$row['clientId']}</th>
+                                            <td>{$row['name']}</td>
+                                            <td>{$row['UserId']}</td>
+                                        </tr>
+                                    ";
+                                }
+                                echo "
                                 </tbody>
-                            </table>
+                                </table>";
+                            ?>
+
+                            <div class="modal fade" id="verticalycentered" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Vertically Centered</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- End Dark Table -->
 
                         </div>
@@ -238,7 +251,8 @@
             </div>
         </footer><!-- End Footer -->
 
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                    class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
