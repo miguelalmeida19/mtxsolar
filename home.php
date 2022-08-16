@@ -157,7 +157,21 @@
                                     <div class="ps-3">
                                         <h6>
                                             <?php
-                                                echo $_SESSION["clients"];
+                                                error_reporting(E_ERROR | E_WARNING | E_PARSE);
+                                                $host = "localhost";
+                                                $user = "root";
+                                                $password = "";
+                                                $db = "mtxsolar";
+
+                                                $con = mysqli_connect($host, $user, $password);
+                                                mysqli_set_charset($con, "utf8mb4");
+                                                mysqli_select_db($con, $db);
+
+                                                $sql = "select * from client";
+                                                $result1 = mysqli_query($con, $sql);
+                                                $num_rows1 = mysqli_num_rows($result1);
+
+                                                echo $num_rows1;
                                             ?>
                                         </h6>
                                         <span class="text-danger small pt-1 fw-bold">12%</span> <span
@@ -175,7 +189,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Customers List</h5>
-
+                            <button data-bs-toggle='modal' data-bs-target='#verticalycentered' type="button" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Add Customer</button>
+                            <br>
+                            <br>
                             <!-- Dark Table -->
                             <?php
 
@@ -204,7 +220,7 @@
 
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "
-                                        <tr data-bs-toggle='modal' data-bs-target='#verticalycentered'>
+                                        <tr>
                                             <th scope='row'>{$row['clientId']}</th>
                                             <td>{$row['name']}</td>
                                             <td>{$row['UserId']}</td>
@@ -218,19 +234,35 @@
 
                             <div class="modal fade" id="verticalycentered" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Vertically Centered</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <form action="insert.php" method="POST">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Add Customer</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row mb-3">
+                                                    <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="name" type="text" class="form-control" required>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                                    <div class="col-sm-10">
+                                                        <input name="file" class="form-control" type="file" accept=".csv" id="formFile" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="form-group">
+                                                    <button name="submit" type="submit" class="form-control btn btn-primary rounded submit px-3">
+                                                        Confirm
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- End Dark Table -->

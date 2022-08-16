@@ -90,14 +90,14 @@
         $_SESSION["username"] = $uname;
 
         $sql = "select * from user where username='" . $uname . "'AND password='" . $password . "' limit 1";
-        $sql1 = "select * from client";
+        $sql1 = "SELECT * FROM client";
 
         try {
             $result = mysqli_query($con, $sql);
             $result1 = mysqli_query($con, $sql1);
 
             $num_rows = mysqli_fetch_row($result)[0];
-            $num_rows1 = mysqli_fetch_row($result1)[0];
+            $num_rows1 = mysqli_num_rows($result1);
 
             $_SESSION["clients"]=$num_rows1;
 
