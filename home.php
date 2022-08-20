@@ -138,6 +138,45 @@
             <section class="section dashboard">
                 <div class="row">
 
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Records <span>| Total Number</span></h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-receipt"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>145</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Records Card -->
+
+                    <!-- Selected Client Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">Selected Customer</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person-fill"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>No customer selected</h6>
+                                        <span class="text-muted small pt-2 ps-1">Select one of the clients below</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Selected Client Card -->
+
                     <!-- Customers Card -->
                     <div class="col-xxl-4 col-xl-12">
 
@@ -174,8 +213,7 @@
                                                 echo $num_rows1;
                                             ?>
                                         </h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                                class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-muted small pt-2 ps-1">This number is </span><span class="text-danger small pt-1 fw-bold">always updated</span>
 
                                     </div>
                                 </div>
@@ -189,7 +227,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Customers List</h5>
-                            <button data-bs-toggle='modal' data-bs-target='#verticalycentered' type="button" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Add Customer</button>
+                            <button data-bs-toggle='modal' data-bs-target='#verticalycentered' type="button"
+                                    class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Add Customer
+                            </button>
                             <br>
                             <br>
                             <!-- Dark Table -->
@@ -238,7 +278,8 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Add Customer</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="row mb-3">
@@ -248,15 +289,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
-                                                    <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                                    <label for="inputNumber" class="col-sm-2 col-form-label">File
+                                                        Upload</label>
                                                     <div class="col-sm-10">
-                                                        <input name="file" class="form-control" type="file" accept=".csv" id="formFile" required>
+                                                        <input name="file" class="form-control" type="file"
+                                                               accept=".csv" id="formFile" required>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="form-group">
-                                                    <button name="submit" type="submit" class="form-control btn btn-primary rounded submit px-3">
+                                                    <button name="submit" type="submit"
+                                                            class="form-control btn btn-primary rounded submit px-3">
                                                         Confirm
                                                     </button>
                                                 </div>

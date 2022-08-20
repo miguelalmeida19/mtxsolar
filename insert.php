@@ -37,15 +37,9 @@
                             window.location = "home.php"
                         </script>
                         <?php
-                    } else {
-                        echo "Meu Deuuuusss";
                     }
                 }
-            } else {
-                echo "Xiiii";
             }
-        } else {
-            echo "errouuuuu";
         }
     }
 ?>
