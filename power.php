@@ -7,6 +7,15 @@
         public $pontoInjeccao;
         public $modo;
 
+        function __construct() {
+            if ($this->solar<0){
+                $this->solar=0;
+            }
+            if ($this->eolic<0){
+                $this->eolic=0;
+            }
+        }
+
 
         public function Total()
         {
@@ -16,25 +25,25 @@
         // Acrescenta aqui mais metodos
         public function PotenciaI()
         {
-            if ($this->solar + $this->eolic < 2) {
-                return $this->solar + $this->eolic;
-            } else {
-                return 2;
+            if ($this->Total()<$this->pontoInjeccao){
+                return $this->Total();
+            }else {
+                return $this->pontoInjeccao;
             }
         }
 
         public function Excedente()
         {
-            if ($this->PotenciaI() < 2) {
+            if ($this->Total()<$this->pontoInjeccao){
                 return 0;
-            } else {
-                return $this->PotenciaI() - 2;
+            }else {
+                return $this->Total()-$this->pontoInjeccao;
             }
         }
 
         public function Excedentesolar()
         {
-            if ($modo = 2) {
+            if ($this->modo == 2) {
                 if ($this->Excedente() <= $this->solar) {
                     return $this->Excedente();
                 } else {
@@ -51,15 +60,15 @@
 
         public function Excedenteeolic()
         {
-            if ($modo = 2) {
+            if ($this->modo == 2) {
                 if ($this->Excedente() <= $this->solar) {
                     return 0;
                 } else {
                     return $this->Excedente() - $this->solar;
                 }
-            } else if ($modo = 1) {
+            } else if ($this->modo == 1) {
                 if ($this->Excedente() <= $this->eolic) {
-                    return $this->Excedente;
+                    return $this->Excedente();
                 } else {
                     return $this->eolic;
                 }

@@ -148,9 +148,8 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Priority</label>
                                     <div class="col-sm-10">
-                                        <select name="priority" class="form-select" aria-label="Default select example"
-                                                required>
-                                            <option value="Solar">Solar</option>
+                                        <select name="priority" class="form-select" aria-label="Default select example" required>
+                                            <option selected value="Solar">Solar</option>
                                             <option value="Eolic">Eolic</option>
                                         </select>
                                     </div>

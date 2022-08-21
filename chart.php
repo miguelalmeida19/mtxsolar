@@ -36,6 +36,7 @@
             // Start the session
             session_start();
             include_once 'db.php';
+            include_once 'power.php';
 
             $injection = $_POST['injection'];
             $priority = $_POST['priority'];
@@ -45,16 +46,58 @@
             $dates = [];
             $solar = [];
             $eolic = [];
+            $totalProduction = [];
+            $injectedPower = [];
+            $surplus = [];
+            $solarSurplus = [];
+            $eolicSurplus = [];
+            $surplusPerc = [];
+            $solarSurplusPerc = [];
+            $eolicSurplusPerc = [];
+
+
             if ($run1) {
                 while ($row = mysqli_fetch_array($run1)) {
                     $dates[] = "'{$row['RecordDate']}'";
                     $solar[] = $row['Solar'];
                     $eolic[] = $row['Eolic'];
+
+                    $power = new Power();
+                    $power->solar = $row['Solar'];
+                    $power->eolic = $row['Eolic'];
+                    $power->pontoInjeccao = $injection;
+
+                    $mode = 0;
+                    if ($priority == 'Solar') {
+                        $mode = 1;
+                    } else {
+                        $mode = 2;
+                    }
+
+                    $power->modo = $mode;
+
+                    $totalProduction[] = $power->Total();
+                    $injectedPower[] = $power->PotenciaI();
+                    $surplus[] = $power->Excedente();
+                    $solarSurplus[] = $power->Excedentesolar();
+                    $eolicSurplus[] = $power->Excedenteeolic();
+                    $surplusPerc[] = $power->Excedenteper();
+                    $solarSurplusPerc[] = $power->Excedentepersolar();
+                    $eolicSurplusPerc[] = $power->Excedentepereolic();
+
                 }
 
                 $dates = implode(',', $dates);
                 $solar = implode(',', $solar);
                 $eolic = implode(',', $eolic);
+                $totalProduction = implode(',', $totalProduction);
+                $injectedPower = implode(',', $injectedPower);
+                $surplus = implode(',', $surplus);
+                $solarSurplus = implode(',', $solarSurplus);
+                $eolicSurplus = implode(',', $eolicSurplus);
+                $surplusPerc = implode(',', $surplusPerc);
+                $solarSurplusPerc = implode(',', $solarSurplusPerc);
+                $eolicSurplusPerc = implode(',', $eolicSurplusPerc);
             }
         ?>
 
@@ -170,14 +213,14 @@
 
                                 <script>
                                     document.addEventListener("DOMContentLoaded", () => {
-                                        new ApexCharts(document.querySelector("#lineChart"), {
+                                        const chart = new ApexCharts(document.querySelector("#lineChart"), {
                                             series: [
                                                 {
                                                     name: "Solar",
                                                     data: [
                                                         <?=
                                                             $solar
-                                                        ?>
+                                                            ?>
                                                     ]
                                                 },
                                                 {
@@ -185,31 +228,73 @@
                                                     data: [
                                                         <?=
                                                             $eolic
-                                                        ?>
+                                                            ?>
                                                     ]
                                                 },
-                                                /*
                                                 {
-                                                    name: "Eolic Production",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    name: "Total Production",
+                                                    data: [
+                                                        <?=
+                                                            $totalProduction
+                                                            ?>
+                                                    ]
                                                 },
                                                 {
                                                     name: "Injected Power",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    data: [
+                                                        <?=
+                                                            $injectedPower
+                                                            ?>
+                                                    ]
                                                 },
                                                 {
                                                     name: "Total Surplus",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    data: [
+                                                        <?=
+                                                            $surplus
+                                                            ?>
+                                                    ]
                                                 },
                                                 {
                                                     name: "Solar Surplus",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    data: [
+                                                        <?=
+                                                            $solarSurplus
+                                                            ?>
+                                                    ]
                                                 },
                                                 {
                                                     name: "Eolic Surplus",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    data: [
+                                                        <?=
+                                                            $eolicSurplus
+                                                            ?>
+                                                    ]
                                                 },
-                                                 */
+                                                {
+                                                    name: "Surplus Percentage",
+                                                    data: [
+                                                        <?=
+                                                            $surplusPerc
+                                                            ?>
+                                                    ]
+                                                },
+                                                {
+                                                    name: "Solar Surplus Percentage",
+                                                    data: [
+                                                        <?=
+                                                            $solarSurplusPerc
+                                                            ?>
+                                                    ]
+                                                },
+                                                {
+                                                    name: "Eolic Surplus Percentage",
+                                                    data: [
+                                                        <?=
+                                                            $eolicSurplusPerc
+                                                            ?>
+                                                    ]
+                                                },
                                             ],
                                             chart: {
                                                 type: 'line',
@@ -237,8 +322,20 @@
                                                         ?>
                                                 ],
                                             }
-                                        }).render();
+                                        });
+
+                                        chart.render();
+                                        chart.hideSeries("Total Production");
+                                        chart.hideSeries("Injected Power");
+                                        chart.hideSeries("Total Surplus");
+                                        chart.hideSeries("Solar Surplus");
+                                        chart.hideSeries("Eolic Surplus");
+                                        chart.hideSeries("Surplus Percentage");
+                                        chart.hideSeries("Solar Surplus Percentage");
+                                        chart.hideSeries("Eolic Surplus Percentage");
                                     });
+
+
                                 </script>
                                 <!-- End Line Chart -->
 
