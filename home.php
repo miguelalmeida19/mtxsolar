@@ -267,7 +267,7 @@
                                             <td>{$row['name']}</td>
                                             <td>{$row['UserId']}</td>
                                             <td>
-                                            <button href='update.php' data-bs-toggle='modal' data-bs-target='#verticalycentered' type='button' class='btn btn-info'><i class='bi bi-pen-fill me-1'></i>Update Customer</button>
+                                            <a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-info'><i class='bi bi-pen-fill me-1'></i>Update Customer</a>
                                             <a href='delete.php?deleteid={$row['id']}&userid={$row['UserId']}' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove Customer</a>
                                             </td>
                                     ";
@@ -314,6 +314,7 @@
                                     </form>
                                 </div>
                             </div>
+
                             <!-- End Dark Table -->
 
                         </div>

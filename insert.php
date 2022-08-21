@@ -61,7 +61,7 @@
 
                         // Parse data from CSV file line by line
                         // Parse data from CSV file line by line
-                        while (($getData = fgetcsv($csvFile, 10000, ";")) !== FALSE) {
+                        while (($getData = fgetcsv($csvFile, 100000, ";")) !== FALSE) {
                             // Get row data
                             $date = $getData[0];
 

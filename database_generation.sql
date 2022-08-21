@@ -24,11 +24,11 @@ ALTER TABLE Client ADD CONSTRAINT FKClient606918 FOREIGN KEY (UserId) REFERENCES
 ALTER TABLE Records ADD CONSTRAINT FKRecords133403 FOREIGN KEY (ClientId) REFERENCES Client (id);
 
 INSERT INTO `user` (`Id`, `username`, `password`) VALUES
-(1, 'admin', 'admin'),
-(2, 'joseph', 'jose123'),
-(3, 'miguel', 'miguel123');
+                                                      (1, 'admin', 'admin'),
+                                                      (2, 'joseph', 'jose123'),
+                                                      (3, 'miguel', 'miguel123');
 
 
 INSERT INTO `client` (`Id`, `name`, `UserId`) VALUES
-(1, 'Joseph', 2),
-(2, 'Miguel', 3);
+                                                  (1, 'Joseph', 2),
+                                                  (2, 'Miguel', 3);
