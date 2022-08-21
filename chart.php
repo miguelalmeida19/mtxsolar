@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <?php
-        // Start the session
-        session_start();
-    ?>
-
-
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -37,6 +31,18 @@
     </head>
 
     <body>
+
+        <?php
+            // Start the session
+            session_start();
+            include_once 'db.php';
+
+            $injection = $_POST['injection'];
+            $priority = $_POST['priority'];
+
+            $query1 = "select RecordDate, Solar, Eolic from records where ClientId={$_SESSION['clientId']}";
+
+        ?>
 
         <!-- ======= Header ======= -->
         <header id="header" class="header fixed-top d-flex align-items-center">
@@ -153,13 +159,33 @@
                                         new ApexCharts(document.querySelector("#lineChart"), {
                                             series: [
                                                 {
-                                                    name: "Desktops",
+                                                    name: "Total Production",
                                                     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
                                                 },
                                                 {
-                                                    name: "Cheiro",
-                                                    data: [10, 20, 30, 41, 69, 62, 79, 91, 148]
-                                                }
+                                                    name: "Solar Production",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
+                                                {
+                                                    name: "Eolic Production",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
+                                                {
+                                                    name: "Injected Power",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
+                                                {
+                                                    name: "Total Surplus",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
+                                                {
+                                                    name: "Solar Surplus",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
+                                                {
+                                                    name: "Eolic Surplus",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
                                             ],
                                             chart: {
                                                 height: 350,

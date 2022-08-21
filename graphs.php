@@ -138,7 +138,32 @@
 
             <section class="section dashboard">
                 <div class="row">
+                    <?php
+                        if (isset($_SESSION['clientId'])) {
 
+                        } else {
+                            echo '<div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">No Customer Selected</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person-fill"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>
+                                        No customer selected
+                                        </h6>
+                                        <a href="home.php" class="text-muted small pt-2 ps-1">Select one of the customer first</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Selected Client Card -->';
+                        }
+                    ?>
                     <!-- Default Card -->
                     <div class="card">
                         <div class="card-body">
@@ -147,7 +172,8 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Priority</label>
                                     <div class="col-sm-10">
-                                        <select name="priority" class="form-select" aria-label="Default select example" required>
+                                        <select name="priority" class="form-select" aria-label="Default select example"
+                                                required>
                                             <option value="Solar">Solar</option>
                                             <option value="Eolic">Eolic</option>
                                         </select>
