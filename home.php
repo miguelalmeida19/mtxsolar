@@ -275,7 +275,7 @@
                                             <td>{$row['name']}</td>
                                             <td>{$row['UserId']}</td>
                                             <td>
-                                            <a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-info'><i class='bi bi-pen-fill me-1'></i>Update Customer</a>
+                                            <a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-success'><i class='bi bi-pen-fill me-1'></i>Update Customer</a>
                                             <a href='delete.php?deleteid={$row['id']}&userid={$row['UserId']}' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove Customer</a>
                                             <a href='select.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-primary'><i class='bi bi-mouse-fill me-1'></i>Select</a>
                                             </td>

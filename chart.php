@@ -131,7 +131,8 @@
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                        <li class="breadcrumb-item active">Graphs</li>
+                        <li class="breadcrumb-item"><a href="graphs.php">Graphs</a></li>
+                        <li class="breadcrumb-item active">Chart</li>
                     </ol>
                 </nav>
             </div><!-- End Page Title -->
@@ -139,35 +140,57 @@
             <section class="section dashboard">
                 <div class="row">
 
-                    <!-- Default Card -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Some parameters</h5>
-                            <form action="chart.php" method="POST">
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Priority</label>
-                                    <div class="col-sm-10">
-                                        <select name="priority" class="form-select" aria-label="Default select example" required>
-                                            <option value="Solar">Solar</option>
-                                            <option value="Eolic">Eolic</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputNumber" class="col-sm-2 col-form-label">Injection point</label>
-                                    <div class="col-sm-10">
-                                        <input name="injection" step="0.01" type="number" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Display Graph</label>
-                                    <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Chart</h5>
+
+                                <!-- Line Chart -->
+                                <div id="lineChart"></div>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", () => {
+                                        new ApexCharts(document.querySelector("#lineChart"), {
+                                            series: [
+                                                {
+                                                    name: "Desktops",
+                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                },
+                                                {
+                                                    name: "Cheiro",
+                                                    data: [10, 20, 30, 41, 69, 62, 79, 91, 148]
+                                                }
+                                            ],
+                                            chart: {
+                                                height: 350,
+                                                type: 'line',
+                                                zoom: {
+                                                    enabled: true
+                                                }
+                                            },
+                                            dataLabels: {
+                                                enabled: false
+                                            },
+                                            stroke: {
+                                                curve: 'smooth'
+                                            },
+                                            grid: {
+                                                row: {
+                                                    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                                                    opacity: 0.5
+                                                },
+                                            },
+                                            xaxis: {
+                                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                                            }
+                                        }).render();
+                                    });
+                                </script>
+                                <!-- End Line Chart -->
+
+                            </div>
                         </div>
-                    </div><!-- End Default Card -->
+                    </div>
                 </div>
             </section>
 
@@ -181,7 +204,7 @@
         </footer><!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                    class="bi bi-arrow-up-short"></i></a>
+                class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

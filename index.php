@@ -76,6 +76,9 @@
     // include mysql database configuration file
     include_once 'db.php';
 
+    $_SESSION['clientName'] = null;
+    $_SESSION['clientId'] = null;
+
     if (isset($_POST['username'])) {
         $uname = $_POST['username'];
         $password = $_POST['password'];
