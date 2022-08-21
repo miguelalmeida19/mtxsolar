@@ -234,8 +234,9 @@ sup {
 }
 
 a {
-    color: var(--bs-link-color);
-    text-decoration: underline
+    color: inherit;
+    text-decoration: inherit;
+    cursor: inherit;
 }
 
 a:hover {

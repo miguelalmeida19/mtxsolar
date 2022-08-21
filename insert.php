@@ -55,7 +55,6 @@
                         if ($run3) {
                             while ($row = mysqli_fetch_array($run3)) {
                                 $cliId = $row['id'];
-                                print "<h2>" . $cliId . "</h2>";
                             }
                         }
 
@@ -66,13 +65,9 @@
                             // Get row data
                             $date = $getData[0];
 
-                            print "<h2>" . $date . "</h2>";
-
                             $solar = $getData[1];
-                            print "<h2>" . $solar . "</h2>";
 
                             $eolic = $getData[2];
-                            print "<h2>" . $eolic . "</h2>";
 
                             $run4 = mysqli_query($conn, "INSERT INTO records (RecordDate, solar, eolic, ClientId) VALUES ('$date','$solar','$eolic','$cliId')");
                         }

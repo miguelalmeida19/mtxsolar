@@ -32,11 +32,9 @@
 
         <link href="assets/css/style.css" rel="stylesheet">
 
-
     </head>
 
     <body>
-
         <!-- ======= Header ======= -->
         <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -217,7 +215,8 @@
                                                 echo $num_rows1;
                                             ?>
                                         </h6>
-                                        <span class="text-muted small pt-2 ps-1">This number is </span><span class="text-danger small pt-1 fw-bold">always updated</span>
+                                        <span class="text-muted small pt-2 ps-1">This number is </span><span
+                                                class="text-danger small pt-1 fw-bold">always updated</span>
 
                                     </div>
                                 </div>
@@ -237,6 +236,7 @@
                             <br>
                             <br>
                             <!-- Dark Table -->
+
                             <?php
 
                                 // include mysql database configuration file
@@ -245,15 +245,20 @@
                                 $sql = "select * from client";
                                 $result = mysqli_query($conn, $sql);
 
-                                echo "<table class='table table-dark'>
+                                echo "
+                                <form method='GET'>
+                                <table class='table table-dark'>
                                 <thead>
                                 <tr>
                                     <th scope='col'>Client ID</th>
                                     <th scope='col'>Name</th>
                                     <th scope='col'>User ID</th>
+                                    <th scope='col'>Operations</th>
                                 </tr>
                                 </thead>
-                                <tbody>";
+                                <tbody>
+                                </form>
+                                ";
 
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "
@@ -261,7 +266,10 @@
                                             <th scope='row'>{$row['id']}</th>
                                             <td>{$row['name']}</td>
                                             <td>{$row['UserId']}</td>
-                                        </tr>
+                                            <td>
+                                            <button href='update.php' data-bs-toggle='modal' data-bs-target='#verticalycentered' type='button' class='btn btn-info'><i class='bi bi-pen-fill me-1'></i>Update Customer</button>
+                                            <a href='delete.php?deleteid={$row['id']}&userid={$row['UserId']}' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove Customer</a>
+                                            </td>
                                     ";
                                 }
                                 echo "
