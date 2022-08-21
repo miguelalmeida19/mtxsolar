@@ -1,12 +1,6 @@
 <?php
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $db = "mtxsolar";
-
-    $con = mysqli_connect($host, $user, $password);
-    mysqli_set_charset($con, "utf8mb4");
-    mysqli_select_db($con, $db);
+    // include mysql database configuration file
+    include_once 'db.php';
 
     if (!empty($_POST['name'])) {
 
@@ -17,12 +11,12 @@
 
         $query = "insert into user(username, password) VALUES ('$username','$password')";
 
-        $run = mysqli_query($con, $query);
+        $run = mysqli_query($conn, $query);
 
         if ($run) {
             $query1 = "select id from user where username='$username'";
 
-            $run1 = mysqli_query($con, $query1);
+            $run1 = mysqli_query($conn, $query1);
 
             if ($run1) {
                 while ($row = mysqli_fetch_array($run1)) {
@@ -30,8 +24,60 @@
 
                     $query2 = "insert into client(name, UserId) VALUES ('$name','$userId')";
 
-                    $run2 = mysqli_query($con, $query2);
+                    $run2 = mysqli_query($conn, $query2);
                     if ($run2) {
+
+                        $fileMimes = array(
+                            'text/x-comma-separated-values',
+                            'text/comma-separated-values',
+                            'application/octet-stream',
+                            'application/vnd.ms-excel',
+                            'application/x-csv',
+                            'text/x-csv',
+                            'text/csv',
+                            'application/csv',
+                            'application/excel',
+                            'application/vnd.msexcel',
+                            'text/plain'
+                        );
+
+                        // Open uploaded CSV file with read-only mode
+                        $csvFile = fopen($file, 'r');
+
+                        // Skip the first line
+                        fgetcsv($csvFile);
+
+                        $query3 = "select id from client where UserId='$userId'";
+
+                        $run3 = mysqli_query($conn, $query3);
+                        $cliId = "";
+
+                        if ($run3) {
+                            while ($row = mysqli_fetch_array($run3)) {
+                                $cliId = $row['id'];
+                                print "<h2>" . $cliId . "</h2>";
+                            }
+                        }
+
+
+                        // Parse data from CSV file line by line
+                        // Parse data from CSV file line by line
+                        while (($getData = fgetcsv($csvFile, 10000, ";")) !== FALSE) {
+                            // Get row data
+                            $date = $getData[0];
+
+                            print "<h2>" . $date . "</h2>";
+
+                            $solar = $getData[1];
+                            print "<h2>" . $solar . "</h2>";
+
+                            $eolic = $getData[2];
+                            print "<h2>" . $eolic . "</h2>";
+
+                            $run4 = mysqli_query($conn, "INSERT INTO records (RecordDate, solar, eolic, ClientId) VALUES ('$date','$solar','$eolic','$cliId')");
+                        }
+                        fclose($csvFile);
+
                         ?>
                         <script type="application/javascript">
                             window.location = "home.php"

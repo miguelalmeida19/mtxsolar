@@ -149,7 +149,18 @@
                                         <i class="bi bi-receipt"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>145</h6>
+                                        <h6>
+                                            <?php
+                                                // include mysql database configuration file
+                                                include_once 'db.php';
+
+                                                $sql = "select * from records";
+                                                $result1 = mysqli_query($conn, $sql);
+                                                $num_rows1 = mysqli_num_rows($result1);
+
+                                                echo $num_rows1;
+                                            ?>
+                                        </h6>
                                     </div>
                                 </div>
                             </div>
@@ -196,18 +207,11 @@
                                     <div class="ps-3">
                                         <h6>
                                             <?php
-                                                error_reporting(E_ERROR | E_WARNING | E_PARSE);
-                                                $host = "localhost";
-                                                $user = "root";
-                                                $password = "";
-                                                $db = "mtxsolar";
-
-                                                $con = mysqli_connect($host, $user, $password);
-                                                mysqli_set_charset($con, "utf8mb4");
-                                                mysqli_select_db($con, $db);
+                                                // include mysql database configuration file
+                                                include_once 'db.php';
 
                                                 $sql = "select * from client";
-                                                $result1 = mysqli_query($con, $sql);
+                                                $result1 = mysqli_query($conn, $sql);
                                                 $num_rows1 = mysqli_num_rows($result1);
 
                                                 echo $num_rows1;
@@ -235,18 +239,11 @@
                             <!-- Dark Table -->
                             <?php
 
-                                error_reporting(E_ERROR | E_WARNING | E_PARSE);
-                                $host = "localhost";
-                                $user = "root";
-                                $password = "";
-                                $db = "mtxsolar";
-
-                                $con = mysqli_connect($host, $user, $password);
-                                mysqli_set_charset($con, "utf8mb4");
-                                mysqli_select_db($con, $db);
+                                // include mysql database configuration file
+                                include_once 'db.php';
 
                                 $sql = "select * from client";
-                                $result = mysqli_query($con, $sql);
+                                $result = mysqli_query($conn, $sql);
 
                                 echo "<table class='table table-dark'>
                                 <thead>
@@ -261,7 +258,7 @@
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "
                                         <tr>
-                                            <th scope='row'>{$row['clientId']}</th>
+                                            <th scope='row'>{$row['id']}</th>
                                             <td>{$row['name']}</td>
                                             <td>{$row['UserId']}</td>
                                         </tr>

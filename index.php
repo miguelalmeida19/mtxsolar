@@ -73,15 +73,8 @@
     </html>
 
 <?php
-    error_reporting(E_ERROR | E_WARNING | E_PARSE);
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $db = "mtxsolar";
-
-    $con = mysqli_connect($host, $user, $password);
-    mysqli_set_charset($con, "utf8mb4");
-    mysqli_select_db($con, $db);
+    // include mysql database configuration file
+    include_once 'db.php';
 
     if (isset($_POST['username'])) {
         $uname = $_POST['username'];
@@ -93,8 +86,8 @@
         $sql1 = "SELECT * FROM client";
 
         try {
-            $result = mysqli_query($con, $sql);
-            $result1 = mysqli_query($con, $sql1);
+            $result = mysqli_query($conn, $sql);
+            $result1 = mysqli_query($conn, $sql1);
 
             $num_rows = mysqli_fetch_row($result)[0];
             $num_rows1 = mysqli_num_rows($result1);
