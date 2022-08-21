@@ -140,31 +140,7 @@
                 <div class="row">
                     <?php
                         if (isset($_SESSION['clientId'])) {
-
-                        } else {
-                            echo '<div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
-                            <div class="card-body">
-                                <h5 class="card-title">No Customer Selected</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-person-fill"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>
-                                        No customer selected
-                                        </h6>
-                                        <a href="home.php" class="text-muted small pt-2 ps-1">Select one of the customer first</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Selected Client Card -->';
-                        }
-                    ?>
-                    <!-- Default Card -->
+                            echo '<!-- Default Card -->
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Some parameters</h5>
@@ -193,7 +169,30 @@
                                 </div>
                             </form>
                         </div>
-                    </div><!-- End Default Card -->
+                    </div><!-- End Default Card -->';
+                        } else {
+                            echo '<div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                            <div class="card-body">
+                                <h5 class="card-title">No Customer Selected</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person-fill"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>
+                                        No customer selected
+                                        </h6>
+                                        <a href="home.php" class="text-muted small pt-2 ps-1">Select one of the customer first</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Selected Client Card -->';
+                        }
+                    ?>
                 </div>
             </section>
 
@@ -202,7 +201,7 @@
         <!-- ======= Footer ======= -->
         <footer id="footer" class="footer">
             <div class="copyright">
-                &copy; Copyright <strong><span>Bernardo Ferreira</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>Mtx Solar</span></strong>. All Rights Reserved
             </div>
         </footer><!-- End Footer -->
 

@@ -41,7 +41,21 @@
             $priority = $_POST['priority'];
 
             $query1 = "select RecordDate, Solar, Eolic from records where ClientId={$_SESSION['clientId']}";
+            $run1 = mysqli_query($conn, $query1);
+            $dates = [];
+            $solar = [];
+            $eolic = [];
+            if ($run1) {
+                while ($row = mysqli_fetch_array($run1)) {
+                    $dates[] = "'{$row['RecordDate']}'";
+                    $solar[] = $row['Solar'];
+                    $eolic[] = $row['Eolic'];
+                }
 
+                $dates = implode(',', $dates);
+                $solar = implode(',', $solar);
+                $eolic = implode(',', $eolic);
+            }
         ?>
 
         <!-- ======= Header ======= -->
@@ -159,13 +173,22 @@
                                         new ApexCharts(document.querySelector("#lineChart"), {
                                             series: [
                                                 {
-                                                    name: "Total Production",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    name: "Solar",
+                                                    data: [
+                                                        <?=
+                                                            $solar
+                                                        ?>
+                                                    ]
                                                 },
                                                 {
-                                                    name: "Solar Production",
-                                                    data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+                                                    name: "Eolic",
+                                                    data: [
+                                                        <?=
+                                                            $eolic
+                                                        ?>
+                                                    ]
                                                 },
+                                                /*
                                                 {
                                                     name: "Eolic Production",
                                                     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
@@ -186,9 +209,9 @@
                                                     name: "Eolic Surplus",
                                                     data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
                                                 },
+                                                 */
                                             ],
                                             chart: {
-                                                height: 350,
                                                 type: 'line',
                                                 zoom: {
                                                     enabled: true
@@ -207,7 +230,12 @@
                                                 },
                                             },
                                             xaxis: {
-                                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                                                type: 'datetime',
+                                                categories: [
+                                                    <?=
+                                                        $dates
+                                                        ?>
+                                                ],
                                             }
                                         }).render();
                                     });
@@ -225,12 +253,12 @@
         <!-- ======= Footer ======= -->
         <footer id="footer" class="footer">
             <div class="copyright">
-                &copy; Copyright <strong><span>Bernardo Ferreira</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>Mtx Solar</span></strong>. All Rights Reserved
             </div>
         </footer><!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-                class="bi bi-arrow-up-short"></i></a>
+                    class="bi bi-arrow-up-short"></i></a>
 
         <!-- Vendor JS Files -->
         <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
