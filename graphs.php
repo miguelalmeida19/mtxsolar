@@ -89,7 +89,7 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" href="graphs.html">
+                <a class="nav-link" href="graphs.php">
                     <i class="bi bi-bar-chart"></i><span>Graphs</span>
                 </a>
             </li><!-- End Graphs -->

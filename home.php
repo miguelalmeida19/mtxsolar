@@ -177,7 +177,15 @@
                                         <i class="bi bi-person-fill"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>No customer selected</h6>
+                                        <h6>
+                                            <?php
+                                                if (isset($_SESSION["clientName"])){
+                                                    echo "<h6>{$_SESSION['clientName']}</h6>";
+                                                }else {
+                                                    echo '<h6>No customer selected</h6>';
+                                                }
+                                            ?>
+                                        </h6>
                                         <span class="text-muted small pt-2 ps-1">Select one of the clients below</span>
                                     </div>
                                 </div>
@@ -269,7 +277,9 @@
                                             <td>
                                             <a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-info'><i class='bi bi-pen-fill me-1'></i>Update Customer</a>
                                             <a href='delete.php?deleteid={$row['id']}&userid={$row['UserId']}' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove Customer</a>
+                                            <a href='select.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-primary'><i class='bi bi-mouse-fill me-1'></i>Select</a>
                                             </td>
+                                        </tr>
                                     ";
                                 }
                                 echo "
