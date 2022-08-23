@@ -300,6 +300,21 @@
                                                 type: 'line',
                                                 zoom: {
                                                     enabled: true
+                                                },
+                                                toolbar: {
+                                                    export: {
+                                                        csv: {
+                                                            filename: 'chart',
+                                                            columnDelimiter: ';',
+                                                            headerCategory: 'category',
+                                                            headerValue: 'value',
+                                                            dateFormatter(timestamp) {
+                                                                let dat = new Date(timestamp);
+                                                                let hours = dat.toISOString().split('T')[1].split('.')[0];
+                                                                return dat.toISOString().split('T')[0] + ' ' + hours.split(':')[0] + ':' + hours.split(':')[1]
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             },
                                             dataLabels: {
@@ -314,6 +329,9 @@
                                                     opacity: 0.5
                                                 },
                                             },
+                                            colors: ["#F3B415", "#F27036", "#663F59", "#6A6E94", "#4E88B4", "#00A7C6", "#18D8D8", '#A9D794',
+                                                '#46AF78', '#A93F55', '#8C5E58', '#2176FF', '#33A1FD', '#7A918D', '#BAFF29'
+                                            ],
                                             xaxis: {
                                                 type: 'datetime',
                                                 categories: [
@@ -321,10 +339,14 @@
                                                         $dates
                                                         ?>
                                                 ],
+                                            },
+                                            yaxis: {
+                                                type: 'numeric'
                                             }
                                         });
 
                                         chart.render();
+                                        /*
                                         chart.hideSeries("Total Production");
                                         chart.hideSeries("Injected Power");
                                         chart.hideSeries("Total Surplus");
@@ -333,6 +355,7 @@
                                         chart.hideSeries("Surplus Percentage");
                                         chart.hideSeries("Solar Surplus Percentage");
                                         chart.hideSeries("Eolic Surplus Percentage");
+                                         */
                                     });
 
 
