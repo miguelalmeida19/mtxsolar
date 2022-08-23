@@ -61,16 +61,20 @@
 
                         // Parse data from CSV file line by line
                         // Parse data from CSV file line by line
-                        while (($getData = fgetcsv($csvFile, 100000, ";")) !== FALSE) {
-                            // Get row data
-                            $date = $getData[0];
+                        try{
+                            while (($getData = fgetcsv($csvFile, 100000,";")) !== FALSE) {
+                                // Get row data
 
-                            $solar = $getData[1];
+                                if (strlen($getData[0])>0){
+                                    $date = $getData[0];
+                                    $solar = rtrim(sprintf('%f', $getData[1]), "0");
+                                    $eolic=str_replace(' ', '', $getData[2]);
+                                    $solar=str_replace(' ', '', $solar);
+                                    $run4 = mysqli_query($conn, "INSERT INTO records (RecordDate, solar, eolic, ClientId) VALUES ('$date','$solar','$eolic','$cliId')");
 
-                            $eolic = $getData[2];
-
-                            $run4 = mysqli_query($conn, "INSERT INTO records (RecordDate, solar, eolic, ClientId) VALUES ('$date','$solar','$eolic','$cliId')");
-                        }
+                                }
+                            }
+                        }catch (Exception $e){}
                         fclose($csvFile);
 
                         ?>
