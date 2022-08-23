@@ -153,7 +153,15 @@
                     <?php
                         include_once 'db.php';
 
-                        $query1 = "select Id, RecordDate, Solar, Eolic, ClientId from records";
+                        $query1 = "";
+
+                        if (isset($_SESSION['clientId'])) {
+                            $query1 = "select Id, RecordDate, Solar, Eolic, ClientId from records where ClientId={$_SESSION['clientId']}";
+                        }else {
+                            $query1 = "select Id, RecordDate, Solar, Eolic, ClientId from records";
+
+                        }
+
                         $run1 = mysqli_query($conn, $query1);
 
                         if ($run1) {

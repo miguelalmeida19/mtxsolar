@@ -26,6 +26,7 @@ ALTER TABLE Records ADD CONSTRAINT FKRecords133403 FOREIGN KEY (ClientId) REFERE
 insert into mtxsolar.user (Id, username, password) values (1, 'admin', 'admin');
 insert into mtxsolar.user (Id, username, password) values (2, 'joseph', 'jose123');
 insert into mtxsolar.user (Id, username, password) values (3, 'miguel', 'miguel123');
+insert into mtxsolar.user (Id, username, password) values (4, 'manager', 'manager');
 
 insert into mtxsolar.client (id, name, UserId) values (1, 'Joseph', 2);
 insert into mtxsolar.client (id, name, UserId) values (2, 'Bernardo', 3);

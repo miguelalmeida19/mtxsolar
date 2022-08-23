@@ -179,9 +179,9 @@
                                     <div class="ps-3">
                                         <h6>
                                             <?php
-                                                if (isset($_SESSION["clientName"])){
+                                                if (isset($_SESSION["clientName"])) {
                                                     echo "<h6>{$_SESSION['clientName']}</h6>";
-                                                }else {
+                                                } else {
                                                     echo '<h6>No customer selected</h6>';
                                                 }
                                             ?>
@@ -275,11 +275,38 @@
                                             <td>{$row['name']}</td>
                                             <td>{$row['UserId']}</td>
                                             <td>
-                                            <a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-success'><i class='bi bi-pen-fill me-1'></i>Update</a>
-                                            <a href='delete.php?deleteid={$row['id']}&userid={$row['UserId']}' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove</a>
+                                            ";
+                                            if (strcmp($_SESSION["role"],"admin")===0){
+                                                    echo "<a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-success'><i class='bi bi-pen-fill me-1'></i>Update</a>
+                                                    <button data-bs-toggle='modal' data-bs-target='#verticalycentered1' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove</button>";
+                                            }
+                                            echo "
                                             <a href='select.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-primary'><i class='bi bi-mouse-fill me-1'></i>Select</a>
                                             </td>
                                         </tr>
+                                        
+                                        <div class='modal fade' id='verticalycentered1' tabindex='-1'>
+                                            <div class='modal-dialog modal-dialog-centered'>
+                                                <form action='insert.php' method='POST'>
+                                                    <div class='modal-content'>
+                                                        <div class='modal-header'>
+                                                            <h5 class='modal-title'>Remove Customer</h5>
+                                                            <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                                                    aria-label='Close'></button>
+                                                        </div>
+                                                        <div class='modal-body'>
+                                                            You are about to delete the customer. Are you sure?
+                                                        </div>
+                                                        <div class='modal-footer'>
+                                                            <div class='form-group'>
+                                                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                                                <a href='delete.php?deleteid={$row['id']}&userid={$row['UserId']}' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     ";
                                 }
                                 echo "

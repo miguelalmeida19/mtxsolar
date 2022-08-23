@@ -157,7 +157,7 @@
                                 <div class="row mb-3">
                                     <label for="inputNumber" class="col-sm-2 col-form-label">Injection point</label>
                                     <div class="col-sm-10">
-                                        <input name="injection" step="0.01" type="number" class="form-control" required>
+                                        <input min="0" name="injection" step="0.01" type="number" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

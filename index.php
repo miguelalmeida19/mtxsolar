@@ -92,13 +92,12 @@
             $result = mysqli_query($conn, $sql);
             $result1 = mysqli_query($conn, $sql1);
 
-            $num_rows = mysqli_fetch_row($result)[0];
+            $num_rows = mysqli_num_rows($result);
             $num_rows1 = mysqli_num_rows($result1);
 
             $_SESSION["clients"]=$num_rows1;
 
             if ($num_rows == 1) {
-                echo $uname;
                 if (strcmp($uname,"admin")===0) {
                     $_SESSION["role"] = "admin";
                 }

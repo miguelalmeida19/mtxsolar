@@ -59,13 +59,13 @@
             if ($run1) {
                 while ($row = mysqli_fetch_array($run1)) {
                     $dates[] = "'{$row['RecordDate']}'";
-                    $solar[] = $row['Solar'];
-                    $eolic[] = $row['Eolic'];
+                    $solar[] = round($row['Solar'],2);
+                    $eolic[] = round($row['Eolic'],2);
 
                     $power = new Power();
-                    $power->solar = $row['Solar'];
-                    $power->eolic = $row['Eolic'];
-                    $power->pontoInjeccao = $injection;
+                    $power->solar = round($row['Solar'],2);
+                    $power->eolic = round($row['Eolic'],2);
+                    $power->pontoInjeccao = round($injection,2);
 
                     $mode = 0;
                     if ($priority == 'Solar') {
@@ -76,14 +76,14 @@
 
                     $power->modo = $mode;
 
-                    $totalProduction[] = $power->Total();
-                    $injectedPower[] = $power->PotenciaI();
-                    $surplus[] = $power->Excedente();
-                    $solarSurplus[] = $power->Excedentesolar();
-                    $eolicSurplus[] = $power->Excedenteeolic();
-                    $surplusPerc[] = $power->Excedenteper();
-                    $solarSurplusPerc[] = $power->Excedentepersolar();
-                    $eolicSurplusPerc[] = $power->Excedentepereolic();
+                    $totalProduction[] = round($power->Total(),2);
+                    $injectedPower[] = round($power->PotenciaI(),2);
+                    $surplus[] = round($power->Excedente(),2) ;
+                    $solarSurplus[] = round($power->Excedentesolar(),2);
+                    $eolicSurplus[] = round($power->Excedenteeolic(),2);
+                    $surplusPerc[] = round($power->Excedenteper(),2);
+                    $solarSurplusPerc[] = round($power->Excedentepersolar(),2);
+                    $eolicSurplusPerc[] = round($power->Excedentepereolic(),2);
 
                 }
 
@@ -203,9 +203,9 @@
             <section class="section dashboard">
                 <div class="row">
 
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="col-lg-6" style="min-width: 90%;">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body" style="width: 100%;">
                                 <h5 class="card-title">Chart</h5>
 
                                 <!-- Line Chart -->
