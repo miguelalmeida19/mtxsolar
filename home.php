@@ -238,11 +238,15 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Customers List</h5>
-                            <button data-bs-toggle='modal' data-bs-target='#verticalycentered' type="button"
-                                    class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Add Customer
-                            </button>
-                            <br>
-                            <br>
+
+                            <?php
+                                if (strcmp($_SESSION["role"], "admin") === 0) {
+                                    echo "<button data-bs-toggle='modal' data-bs-target='#verticalycentered' type='button'
+                                    class='btn btn-primary'><i class='bi bi-plus-circle me-1'></i>Add Customer
+                            </button> <br>
+                            <br>";
+                                }
+                            ?>
                             <!-- Dark Table -->
 
                             <?php
@@ -276,11 +280,11 @@
                                             <td>{$row['UserId']}</td>
                                             <td>
                                             ";
-                                            if (strcmp($_SESSION["role"],"admin")===0){
-                                                    echo "<a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-success'><i class='bi bi-pen-fill me-1'></i>Update</a>
+                                    if (strcmp($_SESSION["role"], "admin") === 0) {
+                                        echo "<a href='update.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-success'><i class='bi bi-pen-fill me-1'></i>Update</a>
                                                     <button data-bs-toggle='modal' data-bs-target='#verticalycentered1' type='button' class='btn btn-danger'><i class='bi bi-person-dash-fill me-1'></i>Remove</button>";
-                                            }
-                                            echo "
+                                    }
+                                    echo "
                                             <a href='select.php?clientId={$row['id']}&clientName={$row['name']}' type='button' class='btn btn-primary'><i class='bi bi-mouse-fill me-1'></i>Select</a>
                                             </td>
                                         </tr>

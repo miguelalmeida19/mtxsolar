@@ -55,6 +55,18 @@
             $solarSurplusPerc = [];
             $eolicSurplusPerc = [];
 
+            $sumTotalSurplus = 0;
+            $sumSolarSurplus = 0;
+            $sumEolicSurplus = 0;
+
+            $sumTotalProduction = 0;
+            $sumTotalSolar = 0;
+            $sumTotalEolic = 0;
+
+            $averageTotalSurplus = 0;
+            $averageSolarSurplus = 0;
+            $averageEolicSurplus = 0;
+
 
             if ($run1) {
                 while ($row = mysqli_fetch_array($run1)) {
@@ -85,6 +97,14 @@
                     $solarSurplusPerc[] = round($power->Excedentepersolar(),2);
                     $eolicSurplusPerc[] = round($power->Excedentepereolic(),2);
 
+
+                    $sumSolarSurplus += $power->Excedentesolar();
+                    $sumEolicSurplus += $power->Excedenteeolic();
+                    $sumTotalSurplus += $power->Excedente();
+
+                    $sumTotalSolar += $power->solar;
+                    $sumTotalEolic += $power->eolic;
+                    $sumTotalProduction += $power->Total();
                 }
 
                 $dates = implode(',', $dates);
@@ -98,6 +118,10 @@
                 $surplusPerc = implode(',', $surplusPerc);
                 $solarSurplusPerc = implode(',', $solarSurplusPerc);
                 $eolicSurplusPerc = implode(',', $eolicSurplusPerc);
+
+                $averageTotalSurplus = round(($sumTotalSurplus/$sumTotalProduction)*100,2);
+                $averageSolarSurplus = round(($sumSolarSurplus/$sumTotalSolar)*100,2);
+                $averageEolicSurplus = round(($sumEolicSurplus/$sumTotalEolic)*100,2);
             }
         ?>
 
@@ -362,9 +386,82 @@
                                 </script>
                                 <!-- End Line Chart -->
 
+                                <h5 class="card-title">Anual surplus %</h5>
+
+                                <!-- Total Card -->
+                                <div class="col-xxl-4 col-md-6">
+                                    <div class="card info-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Total Surplus <span>| %</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div style="background-color: #ffdfdf" class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i style="color: #d61c4e" class="bi bi-gem"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>
+                                                        <?=
+                                                            $averageTotalSurplus
+                                                        ?>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div><!-- End Total Card -->
+
+                                <!-- Solar Card -->
+                                <div class="col-xxl-4 col-md-6">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Solar Surplus <span>| %</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div style="background-color: #fff5df" class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i style="color: #FAC213" class="bi bi-sun-fill"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>
+                                                        <?=
+                                                            $averageSolarSurplus
+                                                        ?>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div><!-- End Solar Card -->
+
+                                <!-- Eolic Card -->
+                                <div class="col-xxl-4 col-md-6">
+                                    <div class="card info-card sales-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Eolic Surplus <span>| %</span></h5>
+
+                                            <div class="d-flex align-items-center">
+                                                <div style="background-color: #ffecdf" class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                    <i style="color: #F77E21" class="bi bi-wind"></i>
+                                                </div>
+                                                <div class="ps-3">
+                                                    <h6>
+                                                        <?=
+                                                            $averageEolicSurplus
+                                                        ?>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div><!-- End Eolic Card -->
+
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </section>
 

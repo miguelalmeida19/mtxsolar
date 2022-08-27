@@ -851,6 +851,21 @@ h6 {
   background: #ffecdf;
 }
 
+.total-card {
+  color: #d61c4e;
+  background: #ffdfdf;
+}
+
+.solar-card {
+  color: #F77E21;
+  background: #ffecdf;
+}
+
+.eolic-card {
+  color: #FAC213;
+  background: #fff5df;
+}
+
 /* Activity */
 .dashboard .activity {
   font-size: 14px;
